@@ -1,0 +1,79 @@
+<%= form_with(model: apartment, url: apartment.persisted? ? apartment_path(apartment) : apartments_path, local: true) do |form| %>
+  <% if apartment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(apartment.errors.count, 'error') %> запретила сохранение этого объекта:</h2>
+
+      <ul>
+        <% apartment.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :Название %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :Описание %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :Цена %>
+    <%= form.text_field :price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :Местоположение %>
+    <%= form.text_area :location %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+ <style>
+    .field {
+      margin-bottom: 20px;
+    }
+
+    .field label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .field input[type="text"],
+    .field textarea {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .actions {
+      margin-top: 20px;
+    }
+
+    #error_explanation {
+      color: #ff0000;
+      margin-bottom: 20px;
+    }
+
+    #error_explanation h2 {
+      font-size: 18px;
+    }
+
+    #error_explanation ul {
+      list-style: none;
+    }
+
+    #error_explanation ul li {
+      margin-bottom: 5px;
+    }
+  </style>

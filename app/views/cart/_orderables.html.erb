@@ -1,0 +1,65 @@
+<% @cart.orderables.each do |orderable| %>
+  <% apartment = orderable.apartment %>
+  <div id="<%= "cart-#{apartment.id}" %>">
+    <div style="display:flex;justify-content:space-between;margin: 0em 5em;">
+      <strong>Назвние:</strong>
+      <%= apartment.title %>
+      <strong>Описание:</strong>
+      <%= apartment.description %>
+      <strong>Цена:</strong>
+      <%= apartment.price %>
+      <%= form_with(url: cart_add_path) do |f| %>
+        <%= f.hidden_field :id, value: apartment.id %>
+        <%= f.number_field :quantity, value: orderable.quantity, min: 0 %>
+        <%= f.submit "Add To Cart" %>
+      <% end %>
+      <%= form_with(url: cart_remove_path) do |f| %>
+        <%= f.hidden_field :id, value: orderable.id %>
+        <%= f.submit "X" %>
+      <% end %>
+      <strong>Total:</strong>
+      <%= orderable.total %>
+    </div>
+  </div>
+<% end %>
+ <style>
+    .cart-item {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    .cart-item strong {
+      margin-right: 10px;
+    }
+
+    .cart-item form {
+      margin-left: 10px;
+    }
+
+    .cart-item form input[type="number"] {
+      width: 50px;
+    }
+
+    .cart-item form input[type="submit"] {
+      padding: 5px 10px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .cart-item form input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+
+    .cart-item form.submit-x input[type="submit"] {
+      background-color: #ff0000;
+    }
+
+    .cart-item form.submit-x input[type="submit"]:hover {
+      background-color: #cc0000;
+    }
+  </style>
